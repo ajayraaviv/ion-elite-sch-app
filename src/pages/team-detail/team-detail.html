@@ -1,0 +1,20 @@
+<ion-header>
+
+  <ion-navbar>
+    
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item *ngFor="let game of games" (click)="gameClicked($event, game)">
+      {{game.opponent}}
+    </ion-item>
+  </ion-list>
+
+
+  <!-- <button ion-button (click)="goHome()">Go Home</button> -->
+</ion-content>
