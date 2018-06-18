@@ -4,6 +4,11 @@
     <ion-title>Teams</ion-title>
   </ion-navbar>
 
+  <ion-toolbar>
+    <ion-searchbar placeholder="Search"
+                    [(ngModel)]="queryText" (ionInput)="updateTeams()"></ion-searchbar>
+  </ion-toolbar>
+
 </ion-header>
 
 
@@ -16,7 +21,7 @@
     <button *ngFor="let team of division.divisionTeams" ion-item (click)="itemTapped($event, team)">
         {{team.name}}
       </button>
-    
+
     </ion-item-group>
   </ion-list>
 

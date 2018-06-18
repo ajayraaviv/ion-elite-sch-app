@@ -1,3 +1,4 @@
+import { UserSettings } from './../../providers/user-settings/user-settings';
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { TournamentsPage } from '../tournaments/tournaments';
@@ -13,8 +14,13 @@ export class MyTeamsPage {
     public favorites: any[];
     constructor(private nav: NavController
         , private loadingController: LoadingController
-        , private eliteApi: EliteApi) {
-        
+        , private eliteApi: EliteApi
+        , private userSettings: UserSettings) {
+
+    }
+
+    ionViewDidEnter() {
+      this.favorites = this.userSettings.getAllFavorites();
     }
 
     goToTournaments() {
