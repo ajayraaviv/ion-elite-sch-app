@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { TournamentsPage } from '../tournaments/tournaments';
+import { TeamHomePage } from '../team-home/team-home';
+import { EliteApi } from '../../providers/elite-api/elite-api';
 
 @Component({
     selector: 'page-my-teams',
@@ -8,13 +10,26 @@ import { TournamentsPage } from '../tournaments/tournaments';
 })
 
 export class MyTeamsPage {
-
-    constructor(private nav: NavController) {
+    public favorites: any[];
+    constructor(private nav: NavController
+        , private loadingController: LoadingController
+        , private eliteApi: EliteApi) {
         
     }
 
     goToTournaments() {
         this.nav.push(TournamentsPage);
+    }
+
+    favoriteTapped($event, favorite) {
+        let loader = this.loadingController.create({
+            content: 'Getting data...',
+            dismissOnPageChange: true
+
+        });
+        loader.present();
+        this.eliteApi.getTournamentData(favorite.tournamentId)
+            .subscribe(t => this.nav.push(TeamHomePage, favorite.team));
     }
 
 }
